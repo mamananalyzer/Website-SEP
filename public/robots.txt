@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /product/add
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /*.json$
+
+Sitemap: https://www.suryamas-ep.com/sitemap.xml

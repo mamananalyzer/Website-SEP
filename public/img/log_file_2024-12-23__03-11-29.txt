@@ -1,0 +1,176 @@
+
+---Downloaded files---
+The import files for: Import Renuma Theme Data were successfully downloaded!
+Initial max execution time = 36000
+Files info:
+Site URL = http://amptronwp3.test
+Data file = C:\laragon\www\amptronwp3/wp-content/themes/renuma/sample-data/contents-demo.xml
+Widget file = C:\laragon\www\amptronwp3/wp-content/themes/renuma/sample-data/widget-settings.wie
+Customizer file = C:\laragon\www\amptronwp3/wp-content/themes/renuma/sample-data/customizer-data.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+footer-area-1 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+footer-area-2 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+footer-area-3 : Sidebar does not exist in theme (moving widget to Inactive)
+
+ Recent Posts - Recent News - Imported to Inactive
+
+footer-area-4 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+footer-area-5 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+footer-area-6 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+footer-area-7 : Sidebar does not exist in theme (moving widget to Inactive)
+
+Text - No Title - Imported to Inactive
+
+Primary Sidebar : 
+
+Search - #Search - Imported
+ Recent Posts - Recent Posts - Imported
+Categories - Categories - Imported
+Tag Cloud - Tags - Imported
+Text - Follow Us - Imported
+Custom HTML - No Title - Imported
+
+Page Sidebar : 
+
+Navigation Menu - Type Of Services - Imported
+Text - No Title - Imported
+Text - No Title - Imported
+Custom HTML - No Title - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---ocdi/after_import---
+
