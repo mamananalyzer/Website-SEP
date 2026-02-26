@@ -300,7 +300,7 @@
                                             class="fa-solid fa-arrow-right"></i></span></span></a>
                         </div> -->
                         <div class="" data-aos="fade-left" data-aos-duration="900">
-                            <a href="https://wa.me/087744500052" class="theme-btn9">
+                            <a href="https://wa.me/6287744500052?text=Hello%2C%20I%20am%20interested%20in%20your%20electrical%20products.%20Could%20you%20please%20provide%20more%20information%3F" target="_blank" rel="noopener noreferrer" class="theme-btn9">
                                 <span class="tb8">Contact
                                     <span class="arrow">
                                         <i class="fa-solid fa-arrow-right"></i>

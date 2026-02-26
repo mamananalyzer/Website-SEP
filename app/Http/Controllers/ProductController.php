@@ -110,8 +110,7 @@ class ProductController extends Controller
             'description' => $validated['description'] ?? null,
         ]);
 
-        return redirect()->route('product.index')
+        return redirect()->route('product.create')
             ->with('success', 'Product "' . $validated['name'] . '" added successfully.');
     }
 }
-

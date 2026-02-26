@@ -50,7 +50,7 @@
 
             <div class="space30"></div>
             <div class="hero-btns">
-              <a href="https://wa.me/087744500052" class="theme-btn2">Call Us Now</a>
+              <a href="https://wa.me/6287744500052?text=Hello%2C%20I%20am%20interested%20in%20your%20electrical%20products.%20Could%20you%20please%20provide%20more%20information%3F" target="_blank" rel="noopener noreferrer" class="theme-btn2">Call Us Now</a>
               <a href="{{ route('any', 'product') }}" class="theme-btn3">View Products</a>
             </div>
           </div>
@@ -189,7 +189,7 @@
                 <i class="fa-brands fa-whatsapp" style="font-size:1.8rem; color:#a5d6a7;"></i>
                 <div style="flex:1;">
                   <p style="margin:0; color:#c8e6c9; font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.05em;">Quick Chat</p>
-                  <a href="https://wa.me/087744500052" target="_blank" rel="noopener"
+                  <a href="https://wa.me/6287744500052?text=Hello%2C%20I%20am%20interested%20in%20your%20electrical%20products.%20Could%20you%20please%20provide%20more%20information%3F" target="_blank" rel="noopener noreferrer"
                      style="color:#ffffff; font-weight:700; font-size:0.95rem; text-decoration:none; display:inline-flex; align-items:center; gap:6px; margin-top:2px;">
                     Chat via WhatsApp
                     <i class="fa-solid fa-arrow-right" style="font-size:0.75rem; transform:rotate(-45deg); color:#a5d6a7;"></i>
