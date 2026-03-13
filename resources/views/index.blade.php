@@ -15,6 +15,123 @@
   "@context": "https://schema.org",
   "@graph": [
     {
+      "@type": "WebSite",
+      "@id": "{{ url('/') }}/#website",
+      "name": "PT. Suryamas Elsindo Primatama",
+      "url": "{{ url('/') }}",
+      "description": "Distributor & Sole Agent produk kelistrikan di Indonesia sejak 1996. Agen resmi ABB, TE Connectivity, RITZ, Elmeasure, OME Motors, Hilkar, Schaffner, Pizzato.",
+      "inLanguage": "id",
+      "publisher": { "@id": "{{ url('/') }}/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "{{ url('/product') }}?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "SiteLinksSearchBox",
+      "url": "{{ url('/') }}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ url('/product') }}?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": ["ItemList", "SiteNavigationElement"],
+      "name": "Main Navigation",
+      "url": "{{ url('/') }}",
+      "itemListElement": [
+        {
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Products",
+          "description": "We offer a wide range of electrical products from world-leading brands including ABB, TE Connectivity, RITZ, Elmeasure, and more.",
+          "url": "{{ url('/product') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "TE Connectivity",
+          "description": "Browse TE Connectivity electrical products — connectors, terminals, sensors, and more. Authorized distributor in Indonesia.",
+          "url": "{{ url('/product/te-connectivity') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "ABB",
+          "description": "Browse ABB electrical products — circuit breakers, contactors, relays, drives, and more. Authorized ABB distributor in Indonesia.",
+          "url": "{{ url('/product/abb') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Elmeasure",
+          "description": "Browse Elmeasure energy meters, ATS systems, and smart energy management solutions. Authorized distributor in Indonesia.",
+          "url": "{{ url('/product/elmeasure') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "RITZ Instrument Transformers",
+          "description": "Browse RITZ current and voltage instrument transformers. Authorized RITZ distributor in Indonesia since 1996.",
+          "url": "{{ url('/product/ritz') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 6,
+          "name": "OME Motors",
+          "description": "Browse OME electric motors for industrial applications. Authorized OME distributor in Indonesia.",
+          "url": "{{ url('/product/ome') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 7,
+          "name": "Hilkar NGR",
+          "description": "Browse Hilkar Neutral Grounding Resistors (NGR) for industrial safety. Authorized Hilkar distributor in Indonesia.",
+          "url": "{{ url('/product/hilkar') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 8,
+          "name": "Schaffner",
+          "description": "Browse Schaffner EMC filters and power quality solutions. Authorized Schaffner distributor in Indonesia.",
+          "url": "{{ url('/product/schaffner') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 9,
+          "name": "Pizzato",
+          "description": "Browse Pizzato safety switches and safety interlock devices. Authorized Pizzato distributor in Indonesia.",
+          "url": "{{ url('/product/pizzato') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 10,
+          "name": "GE / Schneider",
+          "description": "Browse GE and Schneider electrical products available from PT. Suryamas Elsindo Primatama in Indonesia.",
+          "url": "{{ url('/product/ge-schneider') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 11,
+          "name": "About Us",
+          "description": "Learn about PT. Suryamas Elsindo Primatama — authorized electrical distributor & sole agent in Indonesia since 1996.",
+          "url": "{{ url('/about') }}"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 12,
+          "name": "Contact",
+          "description": "Contact PT. Suryamas Elsindo Primatama for product inquiries, quotes, and technical support. Located in Jakarta Barat.",
+          "url": "{{ url('/contact') }}"
+        }
+      ]
+    },
+    {
       "@type": "Organization",
       "@id": "{{ url('/') }}/#organization",
       "name": "PT. Suryamas Elsindo Primatama",

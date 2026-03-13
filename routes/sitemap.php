@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 use App\Models\Product;
 use Illuminate\Support\Str;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,11 @@ Route::get('/sitemap.xml', function () {
         ['url' => url('/product'), 'priority' => '0.9', 'changefreq' => 'daily'],
     ];
 
-    // Brand pages (unique brands)
-    $brands = $products->pluck('brand')->unique()->filter();
-    foreach ($brands as $brand) {
+    // Brand pages — static list of the 9 known brand slugs
+    foreach (array_keys(ProductController::BRAND_LABELS) as $slug) {
         $staticPages[] = [
-            'url'        => url('/product/' . Str::slug($brand)),
-            'priority'   => '0.8',
+            'url'        => url('/product/' . $slug),
+            'priority'   => '0.85',
             'changefreq' => 'weekly',
         ];
     }

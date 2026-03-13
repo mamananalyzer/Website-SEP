@@ -202,51 +202,40 @@
                     <div class="mb-4">
                         <label for="brandSelect" class="form-label">Brand <span style="color:#e53935;">*</span></label>
 
-                        @if($brands->isEmpty())
-                            {{-- No brands yet: show plain text input directly --}}
+                        {{-- Brand select: fixed list from the product catalogue --}}
+
+                        {{-- The real field submitted to the server --}}
+                        <input type="hidden" id="brandValue" name="brand" value="{{ old('brand') }}">
+
+                        <select id="brandSelect"
+                                class="form-select @error('brand') is-invalid @enderror">
+                            <option value="" disabled selected>— Select a brand —</option>
+                            <option value="te-connectivity">TE Connectivity</option>
+                            <option value="schaffner">Schaffner</option>
+                            <option value="ritz">Ritz</option>
+                            <option value="abb">ABB</option>
+                            <option value="hilkar">Hilkar</option>
+                            <option value="ge-schneider">GE/ Schneider</option>
+                            <option value="ome">OME</option>
+                            <option value="elmeasure">Elmeasure</option>
+                            <option value="pizzato">Pizzato</option>
+                            <option value="__new__">＋ Add new brand…</option>
+                        </select>
+
+                        @error('brand')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+
+                        {{-- Revealed when "Add new brand" is chosen --}}
+                        <div id="newBrandWrapper">
+                            <label for="newBrandInput">New brand name</label>
+                            <span class="back-link" id="cancelNewBrand">← back to list</span>
                             <input type="text"
-                                   id="brandSelect"
-                                   name="brand"
-                                   class="form-control @error('brand') is-invalid @enderror"
-                                   value="{{ old('brand') }}"
-                                   placeholder="e.g. ABB"
+                                   id="newBrandInput"
+                                   class="form-control"
+                                   placeholder="e.g. Siemens"
                                    autocomplete="off">
-                            @error('brand')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <div style="font-size:.78rem;color:#888;margin-top:5px;">Enter the brand name for this product.</div>
-
-                        @else
-                            {{-- Existing brands: show select + optional new-brand input --}}
-
-                            {{-- The real field submitted to the server --}}
-                            <input type="hidden" id="brandValue" name="brand" value="{{ old('brand') }}">
-
-                            <select id="brandSelect"
-                                    class="form-select @error('brand') is-invalid @enderror">
-                                <option value="" disabled selected>— Select a brand —</option>
-                                @foreach($brands as $b)
-                                    <option value="{{ $b }}">{{ $b }}</option>
-                                @endforeach
-                                <option value="__new__">＋ Add new brand…</option>
-                            </select>
-
-                            @error('brand')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-
-                            {{-- Revealed when "Add new brand" is chosen --}}
-                            <div id="newBrandWrapper">
-                                <label for="newBrandInput">New brand name</label>
-                                <span class="back-link" id="cancelNewBrand">← back to list</span>
-                                <input type="text"
-                                       id="newBrandInput"
-                                       class="form-control"
-                                       placeholder="e.g. Siemens"
-                                       autocomplete="off">
-                            </div>
-
-                        @endif
+                        </div>
                     </div>
 
                     <hr class="form-divider">

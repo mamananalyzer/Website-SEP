@@ -12,10 +12,12 @@ require __DIR__ . '/sitemap.php';
 
 // ===== Product Routes (must be declared BEFORE generic catch-alls) =====
 Route::get('/product', [ProductController::class, 'index'])->name('product.index');
-Route::get('/product/add', [ProductController::class, 'create'])->name('product.create');
-Route::post('/product/add', [ProductController::class, 'store'])->name('product.store');
-Route::get('/product/{id}', [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show');
-Route::get('/product/{brand}', [ProductController::class, 'brand'])->name('product.brand');
+Route::get('/product/add',    [ProductController::class, 'create'])->name('product.create');
+Route::post('/product/add',   [ProductController::class, 'store'])->name('product.store');
+Route::get('/product/delete', [ProductController::class, 'deleteIndex'])->name('product.delete');
+Route::post('/product/delete',[ProductController::class, 'bulkDestroy'])->name('product.bulkDestroy');
+Route::get('/product/{id}',   [ProductController::class, 'show'])->where('id', '[0-9]+')->name('product.show');
+Route::get('/product/{brand}',[ProductController::class, 'brand'])->name('product.brand');
 
 // ===== Generic Routing (catch-all) =====
 Route::get('/', [RoutingController::class, 'root'])->name('root');

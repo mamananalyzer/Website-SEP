@@ -215,42 +215,13 @@ unset($__errorArgs, $__bag); ?>
                     <div class="mb-4">
                         <label for="brandSelect" class="form-label">Brand <span style="color:#e53935;">*</span></label>
 
-                        <?php if($brands->isEmpty()): ?>
-                            
-                            <input type="text"
-                                   id="brandSelect"
-                                   name="brand"
-                                   class="form-control <?php $__errorArgs = ['brand'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>"
-                                   value="<?php echo e(old('brand')); ?>"
-                                   placeholder="e.g. ABB"
-                                   autocomplete="off">
-                            <?php $__errorArgs = ['brand'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                <div class="invalid-feedback"><?php echo e($message); ?></div>
-                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                            <div style="font-size:.78rem;color:#888;margin-top:5px;">Enter the brand name for this product.</div>
+                        
 
-                        <?php else: ?>
-                            
+                        
+                        <input type="hidden" id="brandValue" name="brand" value="<?php echo e(old('brand')); ?>">
 
-                            
-                            <input type="hidden" id="brandValue" name="brand" value="<?php echo e(old('brand')); ?>">
-
-                            <select id="brandSelect"
-                                    class="form-select <?php $__errorArgs = ['brand'];
+                        <select id="brandSelect"
+                                class="form-select <?php $__errorArgs = ['brand'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
@@ -258,36 +229,40 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>">
-                                <option value="" disabled selected>— Select a brand —</option>
-                                <?php $__currentLoopData = $brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <option value="<?php echo e($b); ?>"><?php echo e($b); ?></option>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <option value="__new__">＋ Add new brand…</option>
-                            </select>
+                            <option value="" disabled selected>— Select a brand —</option>
+                            <option value="te-connectivity">TE Connectivity</option>
+                            <option value="schaffner">Schaffner</option>
+                            <option value="ritz">Ritz</option>
+                            <option value="abb">ABB</option>
+                            <option value="hilkar">Hilkar</option>
+                            <option value="ge-schneider">GE/ Schneider</option>
+                            <option value="ome">OME</option>
+                            <option value="elmeasure">Elmeasure</option>
+                            <option value="pizzato">Pizzato</option>
+                            <option value="__new__">＋ Add new brand…</option>
+                        </select>
 
-                            <?php $__errorArgs = ['brand'];
+                        <?php $__errorArgs = ['brand'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-                                <div class="invalid-feedback"><?php echo e($message); ?></div>
-                            <?php unset($message);
+                            <div class="invalid-feedback"><?php echo e($message); ?></div>
+                        <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-                            
-                            <div id="newBrandWrapper">
-                                <label for="newBrandInput">New brand name</label>
-                                <span class="back-link" id="cancelNewBrand">← back to list</span>
-                                <input type="text"
-                                       id="newBrandInput"
-                                       class="form-control"
-                                       placeholder="e.g. Siemens"
-                                       autocomplete="off">
-                            </div>
-
-                        <?php endif; ?>
+                        
+                        <div id="newBrandWrapper">
+                            <label for="newBrandInput">New brand name</label>
+                            <span class="back-link" id="cancelNewBrand">← back to list</span>
+                            <input type="text"
+                                   id="newBrandInput"
+                                   class="form-control"
+                                   placeholder="e.g. Siemens"
+                                   autocomplete="off">
+                        </div>
                     </div>
 
                     <hr class="form-divider">

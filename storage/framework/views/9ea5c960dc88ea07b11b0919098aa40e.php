@@ -1,9 +1,12 @@
 <?php
-    $pageTitle = $selectedBrand
-        ? strtoupper($selectedBrand) . ' Electrical Products — PT. Suryamas Elsindo Primatama'
+    // Resolve proper display name from the slug (e.g. 'te-connectivity' → 'TE Connectivity')
+    $brandDisplay = $selectedBrand ? ($brandLabels[$selectedBrand] ?? strtoupper($selectedBrand)) : null;
+
+    $pageTitle = $brandDisplay
+        ? $brandDisplay . ' Electrical Products — Authorized Distributor Indonesia | PT. Suryamas Elsindo Primatama'
         : 'Electrical Products — ABB, TE Connectivity, RITZ, Elmeasure | PT. Suryamas';
-    $pageDesc = $selectedBrand
-        ? 'Browse ' . strtoupper($selectedBrand) . ' electrical products from PT. Suryamas Elsindo Primatama, authorized distributor in Indonesia. Contact us for the best pricing.'
+    $pageDesc = $brandDisplay
+        ? 'Buy ' . $brandDisplay . ' electrical products in Indonesia from PT. Suryamas Elsindo Primatama, authorized sole agent & distributor since 1996. Best price guaranteed — contact us today.'
         : 'Browse quality electrical products from PT. Suryamas Elsindo Primatama: ABB, TE Connectivity, RITZ Transformer, Elmeasure, OME Motors, Hilkar, and GE. Authorized distributor in Indonesia since 1996.';
     $canonicalUrl = $selectedBrand ? url('/product/' . $selectedBrand) : url('/product');
 ?>
@@ -21,11 +24,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home",     "item": "<?php echo e(url('/')); ?>"},
-    {"@type": "ListItem", "position": 2, "name": "Products", "item": "<?php echo e(url('/product')); ?>"}<?php if($selectedBrand): ?>,
-    {"@type": "ListItem", "position": 3, "name": "<?php echo e(strtoupper($selectedBrand)); ?>", "item": "<?php echo e(url('/product/' . $selectedBrand)); ?>"}
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home",     "item": "<?php echo e(url('/')); ?>"},
+        {"@type": "ListItem", "position": 2, "name": "Products", "item": "<?php echo e(url('/product')); ?>"}<?php if($selectedBrand): ?>,
+        {"@type": "ListItem", "position": 3, "name": "<?php echo e($brandDisplay); ?>", "item": "<?php echo e(url('/product/' . $selectedBrand)); ?>"}
+        <?php endif; ?>
+      ]
+    }<?php if($selectedBrand): ?>,
+    {
+      "@type": "CollectionPage",
+      "name": "<?php echo e($brandDisplay); ?> Electrical Products",
+      "description": "<?php echo e($pageDesc); ?>",
+      "url": "<?php echo e($canonicalUrl); ?>",
+      "about": {
+        "@type": "Brand",
+        "name": "<?php echo e($brandDisplay); ?>"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "PT. Suryamas Elsindo Primatama",
+        "url": "<?php echo e(url('/')); ?>"
+      }
+    }
     <?php endif; ?>
   ]
 }
@@ -394,23 +417,38 @@
     <div class="product-page-hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Our Products</h1>
-                <p>Browse our complete range of industrial products.</p>
+                <h1>
+                    <?php if($selectedBrand): ?>
+                        <?php echo e($brandDisplay); ?> Products
+                    <?php else: ?>
+                        Our Products
+                    <?php endif; ?>
+                </h1>
+                <p>
+                    <?php if($selectedBrand): ?>
+                        Authorized distributor for <?php echo e($brandDisplay); ?> electrical products in Indonesia.
+                    <?php else: ?>
+                        Browse our complete range of industrial products.
+                    <?php endif; ?>
+                </p>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background:transparent;padding:0;">
                         <li class="breadcrumb-item"><a href="<?php echo e(route('root')); ?>">Home</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo e(route('product.index')); ?>">Products</a></li>
                         <?php if($selectedBrand): ?>
-                            <li class="breadcrumb-item active"><?php echo e(strtoupper($selectedBrand)); ?></li>
+                            <li class="breadcrumb-item active"><?php echo e($brandDisplay); ?></li>
                         <?php else: ?>
                             <li class="breadcrumb-item active">All</li>
                         <?php endif; ?>
                     </ol>
                 </nav>
+                
+                
             </div>
         </div>
     </div>
     
+
 
     
     <section class="product-section">
@@ -423,17 +461,16 @@
                    class="chip <?php echo e(is_null($selectedBrand) ? 'active' : ''); ?>">
                     All
                 </a>
-                <?php $__currentLoopData = $brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <?php
-                        $isActive  = $selectedBrand && strtolower($selectedBrand) === strtolower($brand);
-                        $brandSlug = Str::slug($brand);
-                    ?>
-                    <a href="<?php echo e(route('product.brand', $brandSlug)); ?>"
-                       class="chip <?php echo e($isActive ? 'active' : ''); ?>">
-                        <?php echo e($brand); ?>
-
-                    </a>
-                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php $sb = $selectedBrand; ?>
+                <a href="<?php echo e(route('product.brand', 'te-connectivity')); ?>" class="chip <?php echo e($sb === 'te-connectivity' ? 'active' : ''); ?>">TE Connectivity</a>
+                <a href="<?php echo e(route('product.brand', 'schaffner')); ?>" class="chip <?php echo e($sb === 'schaffner' ? 'active' : ''); ?>">Schaffner</a>
+                <a href="<?php echo e(route('product.brand', 'ritz')); ?>" class="chip <?php echo e($sb === 'ritz' ? 'active' : ''); ?>">Ritz</a>
+                <a href="<?php echo e(route('product.brand', 'abb')); ?>" class="chip <?php echo e($sb === 'abb' ? 'active' : ''); ?>">ABB</a>
+                <a href="<?php echo e(route('product.brand', 'hilkar')); ?>" class="chip <?php echo e($sb === 'hilkar' ? 'active' : ''); ?>">Hilkar</a>
+                <a href="<?php echo e(route('product.brand', 'ge-schneider')); ?>" class="chip <?php echo e($sb === 'ge-schneider' ? 'active' : ''); ?>">GE/ Schneider</a>
+                <a href="<?php echo e(route('product.brand', 'ome')); ?>" class="chip <?php echo e($sb === 'ome' ? 'active' : ''); ?>">OME</a>
+                <a href="<?php echo e(route('product.brand', 'elmeasure')); ?>" class="chip <?php echo e($sb === 'elmeasure' ? 'active' : ''); ?>">Elmeasure</a>
+                <a href="<?php echo e(route('product.brand', 'pizzato')); ?>" class="chip <?php echo e($sb === 'pizzato' ? 'active' : ''); ?>">Pizzato</a>
             </div>
 
             <div class="row g-4">
@@ -448,22 +485,16 @@
                             All Products
                         </a>
 
-                        <?php $__currentLoopData = $brands; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $brand): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <?php
-                                $isActive  = $selectedBrand && strtolower($selectedBrand) === strtolower($brand);
-                                $brandSlug = Str::slug($brand);
-                            ?>
-                            <a href="<?php echo e(route('product.brand', $brandSlug)); ?>"
-                               class="brand-link <?php echo e($isActive ? 'active' : ''); ?>">
-                                <span class="brand-dot"></span>
-                                <?php echo e($brand); ?>
-
-                            </a>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-                        <?php if($brands->isEmpty()): ?>
-                            <p class="text-muted" style="font-size:.82rem;margin:0;">No brands yet.</p>
-                        <?php endif; ?>
+                        <?php $sb = $selectedBrand; ?>
+                        <a href="<?php echo e(route('product.brand', 'te-connectivity')); ?>" class="brand-link <?php echo e($sb === 'te-connectivity' ? 'active' : ''); ?>"><span class="brand-dot"></span>TE Connectivity</a>
+                        <a href="<?php echo e(route('product.brand', 'schaffner')); ?>" class="brand-link <?php echo e($sb === 'schaffner' ? 'active' : ''); ?>"><span class="brand-dot"></span>Schaffner</a>
+                        <a href="<?php echo e(route('product.brand', 'ritz')); ?>" class="brand-link <?php echo e($sb === 'ritz' ? 'active' : ''); ?>"><span class="brand-dot"></span>Ritz</a>
+                        <a href="<?php echo e(route('product.brand', 'abb')); ?>" class="brand-link <?php echo e($sb === 'abb' ? 'active' : ''); ?>"><span class="brand-dot"></span>ABB</a>
+                        <a href="<?php echo e(route('product.brand', 'hilkar')); ?>" class="brand-link <?php echo e($sb === 'hilkar' ? 'active' : ''); ?>"><span class="brand-dot"></span>Hilkar</a>
+                        <a href="<?php echo e(route('product.brand', 'ge-schneider')); ?>" class="brand-link <?php echo e($sb === 'ge-schneider' ? 'active' : ''); ?>"><span class="brand-dot"></span>GE/ Schneider</a>
+                        <a href="<?php echo e(route('product.brand', 'ome')); ?>" class="brand-link <?php echo e($sb === 'ome' ? 'active' : ''); ?>"><span class="brand-dot"></span>OME</a>
+                        <a href="<?php echo e(route('product.brand', 'elmeasure')); ?>" class="brand-link <?php echo e($sb === 'elmeasure' ? 'active' : ''); ?>"><span class="brand-dot"></span>Elmeasure</a>
+                        <a href="<?php echo e(route('product.brand', 'pizzato')); ?>" class="brand-link <?php echo e($sb === 'pizzato' ? 'active' : ''); ?>"><span class="brand-dot"></span>Pizzato</a>
                     </aside>
                 </div>
 
@@ -483,7 +514,7 @@
                     <?php if($selectedBrand): ?>
                         <div class="filter-banner">
                             <span class="filter-label">Showing brand:</span>
-                            <span class="filter-tag"><?php echo e(strtoupper($selectedBrand)); ?></span>
+                            <span class="filter-tag"><?php echo e($brandDisplay); ?></span>
                             <a href="<?php echo e(route('product.index')); ?>">Clear ×</a>
                         </div>
                     <?php endif; ?>
@@ -497,7 +528,7 @@
                             </svg>
                             <h4>No products found</h4>
                             <?php if($selectedBrand): ?>
-                                <p>No products match the brand "<strong><?php echo e(strtoupper($selectedBrand)); ?></strong>".</p>
+                                <p>No products match the brand "<strong><?php echo e($brandDisplay); ?></strong>".</p>
                             <?php else: ?>
                                 <p>No products have been added yet.</p>
                             <?php endif; ?>

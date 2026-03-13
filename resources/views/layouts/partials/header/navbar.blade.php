@@ -211,28 +211,31 @@
                                     <a href="{{ route('any', 'product') }}">Product <i class="fa-solid fa-angle-down"></i></a>
                                     <ul>
                                         <li>
-                                            <a href="{{ route('second', ['product', 'abb']) }}">ABB</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('second', ['product', 'ritz']) }}">Ritz</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('second', ['product', 'te']) }}">TE</a>
+                                            <a href="{{ route('second', ['product', 'te-connectivity']) }}">TE Connectivity</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('second', ['product', 'schaffner']) }}">Schaffner</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('second', ['product', 'ome-motors']) }}">OME Motors</a>
+                                            <a href="{{ route('second', ['product', 'ritz']) }}">Ritz</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('second', ['product', 'elmeasure']) }}">Elmeasure</a>
+                                            <a href="{{ route('second', ['product', 'abb']) }}">ABB</a>
                                         </li>
                                         <li>
                                             <a href="{{ route('second', ['product', 'hilkar']) }}">Hilkar</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route('second', ['product', 'ge']) }}">GE</a>
+                                            <a href="{{ route('second', ['product', 'ge-schneider']) }}">GE/ Schneider</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('second', ['product', 'ome']) }}">OME</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('second', ['product', 'elmeasure']) }}">Elmeasure</a>
+                                        </li>
+                                        <li>
+                                            <a href="{{ route('second', ['product', 'pizzato']) }}">Pizzato</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -538,6 +541,35 @@
                 <a href="{{ route('any', 'product') }}">Product </a>
                 <ul>
                     <li>
+                        <a href="{{ route('second', ['product', 'te-connectivity']) }}">TE Connectivity</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'schaffner']) }}">Schaffner</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'ritz']) }}">Ritz</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'abb']) }}">ABB</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'hilkar']) }}">Hilkar</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'ge-schneider']) }}">GE/ Schneider</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'ome']) }}">OME</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'elmeasure']) }}">Elmeasure</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('second', ['product', 'pizzato']) }}">Pizzato</a>
+                    </li>
+                </ul>
+                {{-- <ul>
+                    <li>
                         <a href="{{ route('second', ['product', 'abb']) }}">ABB</a>
                     </li>
                     <li>
@@ -561,7 +593,7 @@
                     <li>
                         <a href="{{ route('second', ['product', 'ge']) }}">GE</a>
                     </li>
-                </ul>
+                </ul> --}}
             </li>
 
             <li>

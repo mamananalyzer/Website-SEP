@@ -1,9 +1,12 @@
 @php
-    $pageTitle = $selectedBrand
-        ? strtoupper($selectedBrand) . ' Electrical Products — PT. Suryamas Elsindo Primatama'
+    // Resolve proper display name from the slug (e.g. 'te-connectivity' → 'TE Connectivity')
+    $brandDisplay = $selectedBrand ? ($brandLabels[$selectedBrand] ?? strtoupper($selectedBrand)) : null;
+
+    $pageTitle = $brandDisplay
+        ? $brandDisplay . ' Electrical Products — Authorized Distributor Indonesia | PT. Suryamas Elsindo Primatama'
         : 'Electrical Products — ABB, TE Connectivity, RITZ, Elmeasure | PT. Suryamas';
-    $pageDesc = $selectedBrand
-        ? 'Browse ' . strtoupper($selectedBrand) . ' electrical products from PT. Suryamas Elsindo Primatama, authorized distributor in Indonesia. Contact us for the best pricing.'
+    $pageDesc = $brandDisplay
+        ? 'Buy ' . $brandDisplay . ' electrical products in Indonesia from PT. Suryamas Elsindo Primatama, authorized sole agent & distributor since 1996. Best price guaranteed — contact us today.'
         : 'Browse quality electrical products from PT. Suryamas Elsindo Primatama: ABB, TE Connectivity, RITZ Transformer, Elmeasure, OME Motors, Hilkar, and GE. Authorized distributor in Indonesia since 1996.';
     $canonicalUrl = $selectedBrand ? url('/product/' . $selectedBrand) : url('/product');
 @endphp
@@ -21,11 +24,31 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Home",     "item": "{{ url('/') }}"},
-    {"@type": "ListItem", "position": 2, "name": "Products", "item": "{{ url('/product') }}"}@if($selectedBrand),
-    {"@type": "ListItem", "position": 3, "name": "{{ strtoupper($selectedBrand) }}", "item": "{{ url('/product/' . $selectedBrand) }}"}
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home",     "item": "{{ url('/') }}"},
+        {"@type": "ListItem", "position": 2, "name": "Products", "item": "{{ url('/product') }}"}@if($selectedBrand),
+        {"@type": "ListItem", "position": 3, "name": "{{ $brandDisplay }}", "item": "{{ url('/product/' . $selectedBrand) }}"}
+        @endif
+      ]
+    }@if($selectedBrand),
+    {
+      "@type": "CollectionPage",
+      "name": "{{ $brandDisplay }} Electrical Products",
+      "description": "{{ $pageDesc }}",
+      "url": "{{ $canonicalUrl }}",
+      "about": {
+        "@type": "Brand",
+        "name": "{{ $brandDisplay }}"
+      },
+      "provider": {
+        "@type": "Organization",
+        "name": "PT. Suryamas Elsindo Primatama",
+        "url": "{{ url('/') }}"
+      }
+    }
     @endif
   ]
 }
@@ -394,23 +417,49 @@
     <div class="product-page-hero">
         <div class="container">
             <div class="hero-text">
-                <h1>Our Products</h1>
-                <p>Browse our complete range of industrial products.</p>
+                <h1>
+                    @if($selectedBrand)
+                        {{ $brandDisplay }} Products
+                    @else
+                        Our Products
+                    @endif
+                </h1>
+                <p>
+                    @if($selectedBrand)
+                        Authorized distributor for {{ $brandDisplay }} electrical products in Indonesia.
+                    @else
+                        Browse our complete range of industrial products.
+                    @endif
+                </p>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background:transparent;padding:0;">
                         <li class="breadcrumb-item"><a href="{{ route('root') }}">Home</a></li>
                         <li class="breadcrumb-item"><a href="{{ route('product.index') }}">Products</a></li>
                         @if($selectedBrand)
-                            <li class="breadcrumb-item active">{{ strtoupper($selectedBrand) }}</li>
+                            <li class="breadcrumb-item active">{{ $brandDisplay }}</li>
                         @else
                             <li class="breadcrumb-item active">All</li>
                         @endif
                     </ol>
                 </nav>
+                {{-- Admin shortcuts --}}
+                {{-- <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="{{ route('product.create') }}"
+                       class="btn btn-sm"
+                       style="background:#fff;color:#2e7d32;font-weight:700;border-radius:8px;padding:6px 16px;">
+                        <i class="fa-solid fa-plus me-1"></i> Add Product
+                    </a>
+                    <a href="{{ route('product.delete') }}"
+                       class="btn btn-sm"
+                       style="background:rgba(255,255,255,.18);color:#fff;font-weight:600;border:1.5px solid rgba(255,255,255,.5);border-radius:8px;padding:6px 16px;">
+                        <i class="fa-solid fa-trash-can me-1"></i> Manage / Delete
+                    </a>
+                </div> --}}
             </div>
         </div>
     </div>
     {{-- ===== PAGE HERO END ===== --}}
+
 
     {{-- ===== PRODUCT SECTION ===== --}}
     <section class="product-section">
@@ -426,16 +475,16 @@
                    class="chip {{ is_null($selectedBrand) ? 'active' : '' }}">
                     All
                 </a>
-                @foreach($brands as $brand)
-                    @php
-                        $isActive  = $selectedBrand && strtolower($selectedBrand) === strtolower($brand);
-                        $brandSlug = Str::slug($brand);
-                    @endphp
-                    <a href="{{ route('product.brand', $brandSlug) }}"
-                       class="chip {{ $isActive ? 'active' : '' }}">
-                        {{ $brand }}
-                    </a>
-                @endforeach
+                @php $sb = $selectedBrand; @endphp
+                <a href="{{ route('product.brand', 'te-connectivity') }}" class="chip {{ $sb === 'te-connectivity' ? 'active' : '' }}">TE Connectivity</a>
+                <a href="{{ route('product.brand', 'schaffner') }}" class="chip {{ $sb === 'schaffner' ? 'active' : '' }}">Schaffner</a>
+                <a href="{{ route('product.brand', 'ritz') }}" class="chip {{ $sb === 'ritz' ? 'active' : '' }}">Ritz</a>
+                <a href="{{ route('product.brand', 'abb') }}" class="chip {{ $sb === 'abb' ? 'active' : '' }}">ABB</a>
+                <a href="{{ route('product.brand', 'hilkar') }}" class="chip {{ $sb === 'hilkar' ? 'active' : '' }}">Hilkar</a>
+                <a href="{{ route('product.brand', 'ge-schneider') }}" class="chip {{ $sb === 'ge-schneider' ? 'active' : '' }}">GE/ Schneider</a>
+                <a href="{{ route('product.brand', 'ome') }}" class="chip {{ $sb === 'ome' ? 'active' : '' }}">OME</a>
+                <a href="{{ route('product.brand', 'elmeasure') }}" class="chip {{ $sb === 'elmeasure' ? 'active' : '' }}">Elmeasure</a>
+                <a href="{{ route('product.brand', 'pizzato') }}" class="chip {{ $sb === 'pizzato' ? 'active' : '' }}">Pizzato</a>
             </div>
 
             <div class="row g-4">
@@ -450,21 +499,16 @@
                             All Products
                         </a>
 
-                        @foreach($brands as $brand)
-                            @php
-                                $isActive  = $selectedBrand && strtolower($selectedBrand) === strtolower($brand);
-                                $brandSlug = Str::slug($brand);
-                            @endphp
-                            <a href="{{ route('product.brand', $brandSlug) }}"
-                               class="brand-link {{ $isActive ? 'active' : '' }}">
-                                <span class="brand-dot"></span>
-                                {{ $brand }}
-                            </a>
-                        @endforeach
-
-                        @if($brands->isEmpty())
-                            <p class="text-muted" style="font-size:.82rem;margin:0;">No brands yet.</p>
-                        @endif
+                        @php $sb = $selectedBrand; @endphp
+                        <a href="{{ route('product.brand', 'te-connectivity') }}" class="brand-link {{ $sb === 'te-connectivity' ? 'active' : '' }}"><span class="brand-dot"></span>TE Connectivity</a>
+                        <a href="{{ route('product.brand', 'schaffner') }}" class="brand-link {{ $sb === 'schaffner' ? 'active' : '' }}"><span class="brand-dot"></span>Schaffner</a>
+                        <a href="{{ route('product.brand', 'ritz') }}" class="brand-link {{ $sb === 'ritz' ? 'active' : '' }}"><span class="brand-dot"></span>Ritz</a>
+                        <a href="{{ route('product.brand', 'abb') }}" class="brand-link {{ $sb === 'abb' ? 'active' : '' }}"><span class="brand-dot"></span>ABB</a>
+                        <a href="{{ route('product.brand', 'hilkar') }}" class="brand-link {{ $sb === 'hilkar' ? 'active' : '' }}"><span class="brand-dot"></span>Hilkar</a>
+                        <a href="{{ route('product.brand', 'ge-schneider') }}" class="brand-link {{ $sb === 'ge-schneider' ? 'active' : '' }}"><span class="brand-dot"></span>GE/ Schneider</a>
+                        <a href="{{ route('product.brand', 'ome') }}" class="brand-link {{ $sb === 'ome' ? 'active' : '' }}"><span class="brand-dot"></span>OME</a>
+                        <a href="{{ route('product.brand', 'elmeasure') }}" class="brand-link {{ $sb === 'elmeasure' ? 'active' : '' }}"><span class="brand-dot"></span>Elmeasure</a>
+                        <a href="{{ route('product.brand', 'pizzato') }}" class="brand-link {{ $sb === 'pizzato' ? 'active' : '' }}"><span class="brand-dot"></span>Pizzato</a>
                     </aside>
                 </div>
 
@@ -483,7 +527,7 @@
                     @if($selectedBrand)
                         <div class="filter-banner">
                             <span class="filter-label">Showing brand:</span>
-                            <span class="filter-tag">{{ strtoupper($selectedBrand) }}</span>
+                            <span class="filter-tag">{{ $brandDisplay }}</span>
                             <a href="{{ route('product.index') }}">Clear ×</a>
                         </div>
                     @endif
@@ -497,7 +541,7 @@
                             </svg>
                             <h4>No products found</h4>
                             @if($selectedBrand)
-                                <p>No products match the brand "<strong>{{ strtoupper($selectedBrand) }}</strong>".</p>
+                                <p>No products match the brand "<strong>{{ $brandDisplay }}</strong>".</p>
                             @else
                                 <p>No products have been added yet.</p>
                             @endif

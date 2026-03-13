@@ -1,8 +1,9 @@
 @php
-    $productTitle = $product->name . ' — ' . strtoupper($product->brand) . ' | PT. Suryamas Elsindo Primatama';
+    $brandDisplay = $brandLabels[$product->brand] ?? strtoupper($product->brand);
+    $productTitle = $product->name . ' — ' . $brandDisplay . ' | PT. Suryamas Elsindo Primatama';
     $productDesc  = $product->description
         ? Str::limit(strip_tags($product->description), 155)
-        : $product->name . ' from ' . $product->brand . ' — Available at PT. Suryamas Elsindo Primatama, authorized electrical distributor in Indonesia. Contact us for the best price.';
+        : $product->name . ' from ' . $brandDisplay . ' — Available at PT. Suryamas Elsindo Primatama, authorized electrical distributor in Indonesia. Contact us for the best price.';
     $productImage = $product->image_path ? asset('storage/' . $product->image_path) : asset('img/logo/logo-sep.webp');
     $productUrl   = route('product.show', $product->id);
 @endphp
@@ -27,7 +28,7 @@
       "description": "{{ Str::limit(strip_tags($product->description ?? ''), 300) }}",
       "brand": {
         "@type": "Brand",
-        "name": "{{ $product->brand }}"
+        "name": "{{ $brandDisplay }}"
       },
       "image": "{{ $productImage }}",
       "url": "{{ $productUrl }}",
@@ -45,8 +46,8 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home",    "item": "{{ url('/') }}"},
-        {"@type": "ListItem", "position": 2, "name": "Produk",  "item": "{{ url('/product') }}"},
-        {"@type": "ListItem", "position": 3, "name": "{{ $product->brand }}", "item": "{{ route('product.brand', Str::slug($product->brand)) }}"},
+        {"@type": "ListItem", "position": 2, "name": "Products",  "item": "{{ url('/product') }}"},
+        {"@type": "ListItem", "position": 3, "name": "{{ $brandDisplay }}", "item": "{{ route('product.brand', $product->brand) }}"},
         {"@type": "ListItem", "position": 4, "name": "{{ $product->name }}", "item": "{{ $productUrl }}"}
       ]
     }
@@ -330,8 +331,8 @@
     <div class="product-page-hero">
         <div class="container">
             <div class="hero-text">
-                {{-- <h1>{{ $product->name }}</h1>
-                <p>{{ strtoupper($product->brand) }}</p> --}}
+                <h1>{{ $product->name }}</h1>
+                <p>{{ $brandDisplay }}</p>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0" style="background:transparent;padding:0;">
                         <li class="breadcrumb-item"><a href="{{ route('root') }}">Home</a></li>

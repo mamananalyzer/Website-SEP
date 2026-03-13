@@ -4,6 +4,7 @@
 <?php $__env->startSection('og_description', 'Established in 1996, PT. Suryamas Elsindo Primatama is a trusted electrical distributor and sole agent in Indonesia. Serving industries, panel makers, and contractors.'); ?>
 <?php $__env->startSection('og_url', url('/about')); ?>
 <?php $__env->startSection('og_image', asset('img/logo/logo-sep.webp')); ?>
+<?php $__env->startSection('og_type', 'website'); ?>
 
 <?php $__env->startSection('canonical', url('/about')); ?>
 
